@@ -4,8 +4,13 @@ const clientModel = require('../models/clientModel');
 const registerClient = (req, res) => {
   const { email, password, name, cpf, birthdate, phone, maritalStatus, education } = req.body;
 
+  console.log('Request body:', req.body);
+
   bcrypt.hash(password, 10, (err, hashedPassword) => {
-    if (err) return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+    if (err) {
+      console.error('Error hashing password:', err);
+      return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+    }
 
     const newClient = {
       email,
@@ -18,8 +23,13 @@ const registerClient = (req, res) => {
       education,
     };
 
+    console.log('New client:', newClient);
+
     clientModel.createClient(newClient, (error, results) => {
-      if (error) return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+      if (error) {
+        console.error('Error creating client:', error);
+        return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+      }
 
       return res.status(201).json({ status: 'success', message: 'Client registered successfully' });
     });
