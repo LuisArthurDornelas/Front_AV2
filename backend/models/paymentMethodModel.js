@@ -1,10 +1,10 @@
 const pool = require('../db');
 
 const createPaymentMethod = (paymentMethod, callback) => {
-  const { code, name, maxValue, isElectronic } = paymentMethod;
+  const { sigla, nome, valorMaximo, meioEletronico } = paymentMethod;
   pool.query(
-    'INSERT INTO payment_methods (code, name, maxValue, isElectronic) VALUES (?, ?, ?, ?)',
-    [code, name, maxValue, isElectronic],
+    'INSERT INTO meiopagamento (sigla, nome, valorMaximo, meioEletronico) VALUES (?, ?, ?, ?)',
+    [sigla, nome, valorMaximo, meioEletronico],
     callback
   );
 };

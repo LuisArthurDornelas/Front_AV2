@@ -7,7 +7,7 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const paymentMethodRoutes = require('./routes/paymentMethodRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors()); // Usar o middleware cors
 app.use(bodyParser.json());

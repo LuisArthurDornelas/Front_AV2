@@ -1,13 +1,13 @@
 const paymentMethodModel = require('../models/paymentMethodModel');
 
 const createPaymentMethod = (req, res) => {
-  const { code, name, maxValue, isElectronic } = req.body;
+  const { sigla, nome, valorMaximo, meioEletronico } = req.body;
 
   const newPaymentMethod = {
-    code,
-    name,
-    maxValue,
-    isElectronic,
+    sigla,
+    nome,
+    valorMaximo,
+    meioEletronico,
   };
 
   paymentMethodModel.createPaymentMethod(newPaymentMethod, (error, results) => {
