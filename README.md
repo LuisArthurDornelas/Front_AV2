@@ -82,10 +82,10 @@ CREATE TABLE ServicoPagamento (
 
 To validate the creation of all tables, use `SHOW TABLES;` and then quit by using `\quit`
 
-### Steps to run
-## Run the backend
+## Steps to run
+### Run the backend
 In the `backend` folder, run `node index.js`
 
-## Run the frontent
+### Run the frontent
 In the `my-app` folder, run `npm start`
 
