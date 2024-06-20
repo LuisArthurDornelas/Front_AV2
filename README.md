@@ -82,7 +82,7 @@ CREATE TABLE ServicoPagamento (
 
 To validate the creation of all tables, use `SHOW TABLES;` and then quit by using `\quit`
 
-###Steps to run
+### Steps to run
 ## Run the backend
 In the `backend` folder, run `node index.js`
 
