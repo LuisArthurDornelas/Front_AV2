@@ -1,4 +1,4 @@
-const clientModel = require('../models/clientModel');
+const pool = require('../db');
 
 const registerClient = (req, res) => {
   const { email, senha, nome, cpf, dataNascimento, telefone, estadoCivil, escolaridade } = req.body;
@@ -7,7 +7,7 @@ const registerClient = (req, res) => {
 
   const newClient = {
     email,
-    senha, // Salvando a senha diretamente
+    senha,
     nome,
     cpf,
     dataNascimento,
@@ -18,7 +18,7 @@ const registerClient = (req, res) => {
 
   console.log('New client:', newClient);
 
-  clientModel.createClient(newClient, (error, results) => {
+  pool.query('INSERT INTO cliente SET ?', newClient, (error, results) => {
     if (error) {
       console.error('Error creating client:', error);
       return res.status(500).json({ status: 'error', message: 'Internal Server Error' });

@@ -1,23 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors'); // Importar o middleware cors
-const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
 const clientRoutes = require('./routes/clientRoutes');
-const serviceRoutes = require('./routes/serviceRoutes');
-const paymentMethodRoutes = require('./routes/paymentMethodRoutes');
+const authRoutes = require('./routes/authRoutes');
+const serviceRequestRoutes = require('./routes/serviceRequestRoutes');
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/clients', clientRoutes); // Rota para clientes
+app.use('/api/auth', authRoutes); // Rota para autenticação
+app.use('/api/service-requests', serviceRequestRoutes); // Rota para solicitações de serviço
+
 const PORT = process.env.PORT || 3001;
-
-app.use(cors()); // Usar o middleware cors
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/api', authRoutes);
-app.use('/api', clientRoutes);
-app.use('/api', serviceRoutes);
-app.use('/api', paymentMethodRoutes);
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
