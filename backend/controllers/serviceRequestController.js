@@ -26,14 +26,20 @@ const getAllRequests = (req, res) => {
 // Controlador para criar uma nova solicitação de serviço
 const createRequest = (req, res) => {
   const { clienteId, servicoId, dataPedido, status, dataPrevista, meioPagamentoSigla } = req.body;
+
+  if (!clienteId || !servicoId || !dataPedido || !status || !dataPrevista || !meioPagamentoSigla) {
+    return res.status(400).json({ status: 'error', message: 'Todos os campos são obrigatórios' });
+  }
+
   pool.query(
     'INSERT INTO solicitacao (clienteId, servicoId, dataPedido, status, dataPrevista, meioPagamentoSigla) VALUES (?, ?, ?, ?, ?, ?)',
     [clienteId, servicoId, dataPedido, status, dataPrevista, meioPagamentoSigla],
     (error, results) => {
       if (error) {
+        console.error('Error inserting request:', error);
         return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
       }
-      return res.status(201).json({ status: 'success', message: 'Request created successfully' });
+      return res.status(201).json({ status: 'success', message: 'Request created successfully', id: results.insertId });
     }
   );
 };
