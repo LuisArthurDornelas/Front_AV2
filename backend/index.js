@@ -3,6 +3,7 @@ const cors = require('cors');
 const clientRoutes = require('./routes/clientRoutes');
 const authRoutes = require('./routes/authRoutes');
 const serviceRequestRoutes = require('./routes/serviceRequestRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/api/clients', clientRoutes); // Rota para clientes
 app.use('/api/auth', authRoutes); // Rota para autenticação
 app.use('/api/service-requests', serviceRequestRoutes); // Rota para solicitações de serviço
+app.use('/api/service-requests/services', serviceRoutes); // Rota para solicitações de serviço
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

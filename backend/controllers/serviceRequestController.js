@@ -1,10 +1,23 @@
 const pool = require('../db');
 
+// Controlador para obter todos os serviços de TI
+const getAllServices = (req, res) => {
+  console.log('getAllServices chamado');
+  pool.query('SELECT * FROM servicoti', (error, results) => {
+    if (error) {
+      console.error('Erro ao executar a query:', error);
+      return res.status(500).json({ status: 'error', message: 'Erro interno do servidor' });
+    }
+    console.log('Resultados da query:', results);
+    return res.status(200).json(results);
+  });
+};
+
 // Controlador para obter todas as solicitações de serviço
 const getAllRequests = (req, res) => {
   pool.query('SELECT * FROM solicitacao', (error, results) => {
     if (error) {
-      return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+      return res.status(500).json({ status: 'error', message: 'Erro interno do servidor' });
     }
     return res.status(200).json(results);
   });
@@ -64,6 +77,7 @@ const deleteRequest = (req, res) => {
 };
 
 module.exports = {
+  getAllServices,
   getAllRequests,
   createRequest,
   getRequestById,
